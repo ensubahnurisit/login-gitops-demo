@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/health")
 def health():
-    return {"status": "healthy"}
+    return {"status": "healthy","pod": socket.gethostname()}
 
 @app.route("/login", methods=["POST"])
 def login():

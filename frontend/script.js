@@ -1,27 +1,19 @@
 async function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
 
-    const username =
-        document.getElementById("username").value;
+  const response = await fetch(
+    "http://192.168.49.2:30001/login",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    }
+  );
 
-    const password =
-        document.getElementById("password").value;
+  const data = await response.json();
 
-    const response = await fetch(
-        "http://localhost:5000/login",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username,
-                password
-            })
-        }
-    );
-
-    const data = await response.json();
-
-    document.getElementById("result")
-        .innerText = data.message;
+  document.getElementById("result").innerText = data.message;
 }
